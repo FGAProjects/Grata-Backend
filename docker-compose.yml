@@ -5,9 +5,9 @@ services:
     image: postgres:11
     hostname: ec2-174-129-43-40.compute-1.amazonaws.com
     environment:
-      - POSTGRES_USER=ppohnsbjrkozmb
-      - POSTGRES_PASSWORD=9ecc88cea24183c2cddc037d3854f288c03232429ac5bd868bd119244ee3b2a3
-      - POSTGRES_DB=ddeonhv6ei3em8
+      - POSTGRES_USER=argoqhirukoixl
+      - POSTGRES_PASSWORD=83405daca6457af89707205fbfaf947962f5d5ace638c0a32c75eae6aa247ea8
+      - POSTGRES_DB=d203letc58un47
     ports:
       - "5432:5432"
   backend:

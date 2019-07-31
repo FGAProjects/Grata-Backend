@@ -3,7 +3,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SECRET_KEY = '@^poh(7twcz1t@2405cny25+t=p-ue1nwfk_ac4!-=_%bt89dc'
 DEBUG = True
-ALLOWED_HOSTS = ['grata-api-42.herokuapp.com/']
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -55,14 +55,15 @@ REST_FRAMEWORK = {
 }
 
 WSGI_APPLICATION = 'settings.wsgi.application'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ddeonhv6ei3em8',
-        'USER': 'ppohnsbjrkozmb',
-        'PASSWORD': '9ecc88cea24183c2cddc037d3854f288c03232429ac5bd868bd119244ee3b2a3',
-        'HOST': 'ec2-174-129-43-40.compute-1.amazonaws.com',
+        'NAME': 'd203letc58un47',
+        'USER': 'argoqhirukoixl',
+        'PASSWORD': '83405daca6457af89707205fbfaf947962f5d5ace638c0a32c75eae6aa247ea8',
+        'HOST': 'ec2-107-22-222-161.compute-1.amazonaws.com',
         'PORT': '5432'
     }
 }
@@ -93,10 +94,7 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIR = (os.path.join(BASE_DIR, 'static'))
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = False
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
