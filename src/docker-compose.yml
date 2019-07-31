@@ -1,12 +1,25 @@
 version: "3"
 
 services:
+  db:
+    image: postgres:11
+    hostname: ec2-174-129-43-40.compute-1.amazonaws.com
+    environment:
+      - POSTGRES_USER=ppohnsbjrkozmb
+      - POSTGRES_PASSWORD=9ecc88cea24183c2cddc037d3854f288c03232429ac5bd868bd119244ee3b2a3
+      - POSTGRES_DB=ddeonhv6ei3em8
+    ports:
+      - "5432:5432"
   backend:
     build: .
     volumes:
       - .:/code
     ports:
       - "8000:8000"
+    links:
+      - db
+    depends_on:
+      - db
     stdin_open: true
     tty: true
     command: bash -c "python manage.py makemigrations &&

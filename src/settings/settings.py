@@ -3,7 +3,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SECRET_KEY = '@^poh(7twcz1t@2405cny25+t=p-ue1nwfk_ac4!-=_%bt89dc'
 DEBUG = True
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['grata-api-42.herokuapp.com/']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -27,6 +27,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
 ROOT_URLCONF = 'settings.urls'
@@ -58,11 +59,11 @@ WSGI_APPLICATION = 'settings.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DATABASE_NAME'),
-        'USER': os.environ.get('DATABASE_USER'),
-        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
-        'HOST': os.environ.get('DATABASE_HOST'),
-        'PORT': os.environ.get('DATABASE_PORT')
+        'NAME': 'ddeonhv6ei3em8',
+        'USER': 'ppohnsbjrkozmb',
+        'PASSWORD': '9ecc88cea24183c2cddc037d3854f288c03232429ac5bd868bd119244ee3b2a3',
+        'HOST': 'ec2-174-129-43-40.compute-1.amazonaws.com',
+        'PORT': '5432'
     }
 }
 
@@ -98,3 +99,4 @@ STATICFILES_DIRS = (
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = False
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
