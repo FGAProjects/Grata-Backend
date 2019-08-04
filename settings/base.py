@@ -1,6 +1,7 @@
 import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+BASE_DIR = os.path.dirname(os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__))))
 SECRET_KEY = '@^poh(7twcz1t@2405cny25+t=p-ue1nwfk_ac4!-=_%bt89dc'
 DEBUG = True
 ALLOWED_HOSTS = []
@@ -21,8 +22,9 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
-    
-    'articles'
+
+    'articles',
+    'users'
 ]
 
 SITE_ID = 1
@@ -77,8 +79,20 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIR = (os.path.join(BASE_DIR, 'static'))
+
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = False
+
+ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_EMAIL_REQUIRED = False
+AUTH_USER_MODEL = 'users.User'
+
+REST_AUTH_SERIALIZERS = {
+    'USERS_DETAILS_SERIALIZER': 'users.serializers.UserSerializer',
+}
+
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER': ''
+}
