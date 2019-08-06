@@ -1,7 +1,7 @@
 from .base import *
 
 DEBUG = True
-ALLOWED_HOSTS += ['http://api-grata.herokuapp.com']
+ALLOWED_HOSTS += ['*']
 WSGI_APPLICATION = 'wsgi.prod.application'
 
 DATABASES = {
