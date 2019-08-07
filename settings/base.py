@@ -1,7 +1,7 @@
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SECRET_KEY = ')o$-g&!rrq%#%u7bmdxb(%lzk9)ft^2y@1v=$*1m!b1$e6@i6a'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = True
 ALLOWED_HOSTS = []
 
@@ -12,6 +12,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
     'django.contrib.sites',
     'allauth',
     'allauth.account',
@@ -22,7 +23,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
 
-    'articles'
+    'articles',
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -62,6 +64,14 @@ TEMPLATES = [
     },
 ]
 
+REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER': 'users.serializers.UserSerializer',
+}
+
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER': 'users.serializers.CustomRegisterSerializer',
+}
+
 CSRF_COOKIE_NAME = "csrftoken"
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
@@ -77,6 +87,7 @@ STATICFILES_DIR = (os.path.join(BASE_DIR, 'static'))
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = False
 
+AUTH_USER_MODEL = 'users.User'
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_AUTHENTICATION_METHOD = 'username'

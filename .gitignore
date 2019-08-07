@@ -6,6 +6,7 @@ __pycache__/
 .env
 .vscode
 .Python
+db.sqlite3
 build/
 develop-eggs/
 dist/
