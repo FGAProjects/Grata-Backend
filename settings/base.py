@@ -24,7 +24,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
 
     'articles',
-    'users'
+    'users',
+    'api'
 ]
 
 MIDDLEWARE = [
@@ -41,9 +42,14 @@ MIDDLEWARE = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny'
-    ]
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
 }
 
 ROOT_URLCONF = 'settings.urls'

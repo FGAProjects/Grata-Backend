@@ -1,13 +1,16 @@
 from allauth.account.adapter import get_adapter
-from rest_framework import serializers
 from rest_auth.registration.serializers import RegisterSerializer
+from rest_framework import serializers
 from rest_framework.authtoken.models import Token
-from users.models import User
+
+from .models import User
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('email', 'username', 'password', 'is_student', 'is_teacher')
+
 
 class CustomRegisterSerializer(RegisterSerializer):
     is_student = serializers.BooleanField()
@@ -35,8 +38,8 @@ class CustomRegisterSerializer(RegisterSerializer):
         user.is_teacher = self.cleaned_data.get('is_teacher')
         user.save()
         adapter.save_user(request, user, self)
-
         return user
+
 
 class TokenSerializer(serializers.ModelSerializer):
     user_type = serializers.SerializerMethodField()
