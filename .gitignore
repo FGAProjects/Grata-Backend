@@ -6,6 +6,7 @@ __pycache__/
 .env
 .vscode
 .Python
+db.sqlite3
 build/
 develop-eggs/
 dist/
@@ -17,7 +18,10 @@ lib64/
 parts/
 sdist/
 var/
-migrations/
+*/migrations/*_initial.py
+*/migrations/000*_*_*_*.py
+*/migrations/*_auto_*.py
+*/migrations/000*_*_*.py
 *.egg-info/
 .installed.cfg
 *.egg
