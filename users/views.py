@@ -1,10 +1,10 @@
 from rest_framework import viewsets
-from django.shortcuts import render
+from rest_framework.generics import ListCreateAPIView
 
-from .models import User
+from .models import Person
 from .serializers import UserSerializer
 
+class UserViewSet(ListCreateAPIView):
 
-class UserViewSet(viewsets.ModelViewSet):
+    queryset = Person.objects.all()
     serializer_class = UserSerializer
-    queryset = User.objects.all()

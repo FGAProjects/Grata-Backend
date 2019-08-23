@@ -3,45 +3,54 @@ from rest_auth.registration.serializers import RegisterSerializer
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 
-from .models import User
-
+from .models import Person
 
 class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('id', 'email', 'username', 'password', 'is_student', 'is_teacher')
 
+    class Meta:
+        model = Person
+        fields = ('id', 'email', 'username', 'name', 'password', 'ramal','is_administrator', 'is_participant')
 
 class CustomRegisterSerializer(RegisterSerializer):
-    is_student = serializers.BooleanField()
-    is_teacher = serializers.BooleanField()
+
+    name = serializers.CharField(max_length=40)
+    ramal = serializers.CharField(max_length=6)
+    is_administrator = serializers.BooleanField()
+    is_participant = serializers.BooleanField()
 
     class Meta:
-        model = User
-        fields = ('email', 'username', 'password', 'is_student', 'is_teacher')
+        model = Person
+        fields = ('email', 'username', 'name', 'ramal', 'password', 'is_administrator', 'is_participant')
 
     def get_cleaned_data(self):
+
         return {
             'username': self.validated_data.get('username', ''),
+            'name': self.validated_data.get('name',''),
+            'ramal': self.validated_data.get('ramal', ''),
             'password1': self.validated_data.get('password1', ''),
             'password2': self.validated_data.get('password2', ''),
             'email': self.validated_data.get('email', ''),
-            'is_student': self.validated_data.get('is_student', ''),
-            'is_teacher': self.validated_data.get('is_teacher', '')
+            'is_administrator': self.validated_data.get('is_administrator', ''),
+            'is_participant': self.validated_data.get('is_participant', '')
         }
 
     def save(self, request):
+
         adapter = get_adapter()
         user = adapter.new_user(request)
         self.cleaned_data = self.get_cleaned_data()
-        user.is_student = self.cleaned_data.get('is_student')
-        user.is_teacher = self.cleaned_data.get('is_teacher')
+        user.is_administrator = self.cleaned_data.get('is_administrator')
+        user.is_participant = self.cleaned_data.get('is_participant')
+        user.name = self.cleaned_data.get('name')
+        user.ramal = self.cleaned_data.get('ramal')
         user.save()
         adapter.save_user(request, user, self)
         return user
 
 
 class TokenSerializer(serializers.ModelSerializer):
+
     user_type = serializers.SerializerMethodField()
 
     class Meta:
@@ -52,9 +61,9 @@ class TokenSerializer(serializers.ModelSerializer):
         serializer_data = UserSerializer(
             obj.user
         ).data
-        is_student = serializer_data.get('is_student')
-        is_teacher = serializer_data.get('is_teacher')
+        is_administrator = serializer_data.get('is_administrator')
+        is_participant = serializer_data.get('is_participant')
         return {
-            'is_student': is_student,
-            'is_teacher': is_teacher
+            'is_administrator': is_administrator,
+            'is_participant': is_participant
         }

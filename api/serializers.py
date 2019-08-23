@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from users.models import User
+from users.models import Person
 from .models import Assignment, Question, Choice, GradedAssignment
 
 
@@ -33,7 +33,7 @@ class AssignmentSerializer(serializers.ModelSerializer):
         data = request.data
 
         assignment = Assignment()
-        teacher = User.objects.get(username=data['teacher'])
+        teacher = Person.objects.get(username=data['teacher'])
         assignment.teacher = teacher
         assignment.title = data['title']
         assignment.save()
@@ -70,7 +70,7 @@ class GradedAssignmentSerializer(serializers.ModelSerializer):
         print(data)
 
         assignment = Assignment.objects.get(id=data['asntId'])
-        student = User.objects.get(username=data['username'])
+        student = Person.objects.get(username=data['username'])
 
         graded_asnt = GradedAssignment()
         graded_asnt.assignment = assignment
