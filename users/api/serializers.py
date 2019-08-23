@@ -3,13 +3,13 @@ from rest_auth.registration.serializers import RegisterSerializer
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 
-from .models import Person
+from users.models import Person
 
 class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Person
-        fields = ('id', 'email', 'username', 'name', 'password', 'ramal','is_administrator', 'is_participant')
+        fields = ('id', 'email', 'username', 'name', 'ramal', 'is_administrator', 'is_participant')
 
 class CustomRegisterSerializer(RegisterSerializer):
 
@@ -46,8 +46,8 @@ class CustomRegisterSerializer(RegisterSerializer):
         user.ramal = self.cleaned_data.get('ramal')
         user.save()
         adapter.save_user(request, user, self)
-        return user
 
+        return user
 
 class TokenSerializer(serializers.ModelSerializer):
 

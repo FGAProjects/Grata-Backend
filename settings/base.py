@@ -71,12 +71,12 @@ TEMPLATES = [
 ]
 
 REST_AUTH_SERIALIZERS = {
-    'USER_DETAILS_SERIALIZER': 'users.serializers.UserSerializer',
-    'TOKEN_SERIALIZER': 'users.serializers.TokenSerializer'
+    'USER_DETAILS_SERIALIZER': 'users.api.serializers.UserSerializer',
+    'TOKEN_SERIALIZER': 'users.api.serializers.TokenSerializer'
 }
 
 REST_AUTH_REGISTER_SERIALIZERS = {
-    'REGISTER_SERIALIZER': 'users.serializers.CustomRegisterSerializer',
+    'REGISTER_SERIALIZER': 'users.api.serializers.CustomRegisterSerializer',
 }
 
 CSRF_COOKIE_NAME = "csrftoken"
