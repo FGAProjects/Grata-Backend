@@ -1,9 +1,6 @@
-from django.urls import path
-from users.api.views import UserList, UserDetail, UserUpdate, DeleteUser
+from rest_framework.routers import DefaultRouter
+from users.api.views import UserViewSet
 
-urlpatterns = [
-    path('usuarios', UserList.as_view()),
-    path('detalhes/<int:pk>/', UserDetail.as_view()),
-    path('alterar_informacoes/<int:pk>/', UserUpdate.as_view()),
-    path('excluir_usuario/<int:pk>/', DeleteUser.as_view())
-]
+router = DefaultRouter()
+router.register(r'', UserViewSet, base_name='users')
+urlpatterns = router.urls

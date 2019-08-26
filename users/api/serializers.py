@@ -3,34 +3,32 @@ from rest_auth.registration.serializers import RegisterSerializer
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 
-from users.models import Person
+from users.models import User
 
 class UserSerializer(serializers.ModelSerializer):
-
     class Meta:
-        model = Person
-        fields = ('id', 'email', 'username', 'name', 'ramal', 'is_administrator', 'is_participant')
+        model = User
+        fields = ('id', 'email', 'username', 'ramal', 'name', 'password', 'is_administrator', 'is_participant')
 
 class CustomRegisterSerializer(RegisterSerializer):
 
-    name = serializers.CharField(max_length=40)
-    ramal = serializers.CharField(max_length=6)
-    is_administrator = serializers.BooleanField()
     is_participant = serializers.BooleanField()
+    is_administrator = serializers.BooleanField()
+    ramal = serializers.CharField(max_length=6)
+    name = serializers.CharField(max_length=40)
 
     class Meta:
-        model = Person
-        fields = ('email', 'username', 'name', 'ramal', 'password', 'is_administrator', 'is_participant')
+        model = User
+        fields = ('email', 'username', 'ramal', 'name', 'password', 'is_administrator', 'is_participant')
 
     def get_cleaned_data(self):
-
         return {
             'username': self.validated_data.get('username', ''),
-            'name': self.validated_data.get('name',''),
-            'ramal': self.validated_data.get('ramal', ''),
+            'email': self.validated_data.get('email', ''),
             'password1': self.validated_data.get('password1', ''),
             'password2': self.validated_data.get('password2', ''),
-            'email': self.validated_data.get('email', ''),
+            'ramal': self.validated_data.get('ramal', ''),
+            'name': self.validated_data.get('name', ''),
             'is_administrator': self.validated_data.get('is_administrator', ''),
             'is_participant': self.validated_data.get('is_participant', '')
         }
@@ -40,17 +38,29 @@ class CustomRegisterSerializer(RegisterSerializer):
         adapter = get_adapter()
         user = adapter.new_user(request)
         self.cleaned_data = self.get_cleaned_data()
-        user.is_administrator = self.cleaned_data.get('is_administrator')
         user.is_participant = self.cleaned_data.get('is_participant')
+        user.is_administrator = self.cleaned_data.get('is_administrator')
         user.name = self.cleaned_data.get('name')
         user.ramal = self.cleaned_data.get('ramal')
+
+        if user.is_administrator == True:
+
+            user.is_staff = True
+            user.is_superuser = True
+            user.is_active = True
+
+        else :
+
+            user.is_staff = False
+            user.is_superuser = False
+            user.is_active = True
+
         user.save()
         adapter.save_user(request, user, self)
 
         return user
 
 class TokenSerializer(serializers.ModelSerializer):
-
     user_type = serializers.SerializerMethodField()
 
     class Meta:
@@ -64,6 +74,6 @@ class TokenSerializer(serializers.ModelSerializer):
         is_administrator = serializer_data.get('is_administrator')
         is_participant = serializer_data.get('is_participant')
         return {
-            'is_administrator': is_administrator,
-            'is_participant': is_participant
+            'is_participant': is_participant,
+            'is_administrator': is_administrator
         }
