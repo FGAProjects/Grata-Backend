@@ -6,9 +6,11 @@ from rest_framework.authtoken.models import Token
 from users.models import User
 
 class UserSerializer(serializers.ModelSerializer):
+
     class Meta:
+
         model = User
-        fields = ('id', 'email', 'username', 'ramal', 'name', 'password', 'is_administrator', 'is_participant')
+        fields = ('id', 'email', 'username', 'ramal', 'name', 'is_administrator', 'is_participant')
 
 class CustomRegisterSerializer(RegisterSerializer):
 
@@ -18,6 +20,7 @@ class CustomRegisterSerializer(RegisterSerializer):
     name = serializers.CharField(max_length=40)
 
     class Meta:
+
         model = User
         fields = ('email', 'username', 'ramal', 'name', 'password', 'is_administrator', 'is_participant')
 
@@ -61,6 +64,7 @@ class CustomRegisterSerializer(RegisterSerializer):
         return user
 
 class TokenSerializer(serializers.ModelSerializer):
+
     user_type = serializers.SerializerMethodField()
 
     class Meta:
