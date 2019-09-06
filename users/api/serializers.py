@@ -16,8 +16,8 @@ class CustomRegisterSerializer(RegisterSerializer):
 
     is_participant = serializers.BooleanField()
     is_administrator = serializers.BooleanField()
-    ramal = serializers.CharField(max_length=6)
-    name = serializers.CharField(max_length=40)
+    ramal = serializers.CharField(max_length = 6)
+    name = serializers.CharField(max_length = 40)
 
     class Meta:
 

@@ -4,7 +4,6 @@ from django.contrib.auth.models import Group
 
 from .models import User, Participant
 
-
 class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
