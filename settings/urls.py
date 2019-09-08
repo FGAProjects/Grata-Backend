@@ -8,6 +8,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('users.urls')),
     path('projects/', include('projects.urls')),
+    path('sectors/', include('sectors.urls')),
+
     path('assignments/', include('api.assignments.urls')),
-path('graded-assignments/', include('api.graded_assignments.urls'))
+    path('graded-assignments/', include('api.graded_assignments.urls'))
 ]

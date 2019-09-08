@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import AbstractUser, PermissionsMixin
 
-from setors.models import Setor
+from sectors.models import Sector
 
 class User(AbstractUser, PermissionsMixin):
 
@@ -12,9 +12,9 @@ class User(AbstractUser, PermissionsMixin):
     is_participant = models.BooleanField()
     ramal = models.CharField(max_length = 6)
     name = models.CharField(max_length = 40)
-    is_staff = models.BooleanField(_("staff status"), default = False)
-    is_active = models.BooleanField(_("active status"), default = False)
-    is_superuser = models.BooleanField(_("superuser status"), default = False)
+    is_staff = models.BooleanField(_('staff status'), default = False)
+    is_active = models.BooleanField(_('active status'), default = False)
+    is_superuser = models.BooleanField(_('superuser status'), default = False)
 
     def __str__(self):
         return self.username

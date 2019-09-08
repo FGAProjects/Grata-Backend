@@ -1,9 +1,9 @@
 from rest_framework.serializers import ModelSerializer
-from setors.models import Setor
+from sectors.models import Sector
 
 class SetorSerialize(ModelSerializer):
 
     class Meta:
 
-        model = Setor
+        model = Sector
         fields = ('__all__')

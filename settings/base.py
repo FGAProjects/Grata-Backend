@@ -25,7 +25,7 @@ INSTALLED_APPS = [
 
     'users',
     'projects',
-    'setors',
+    'sectors',
     'api'
 ]
 
