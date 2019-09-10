@@ -12,6 +12,7 @@ class User(AbstractUser, PermissionsMixin):
     is_participant = models.BooleanField()
     ramal = models.CharField(max_length = 6)
     name = models.CharField(max_length = 40)
+    sector = models.ForeignKey(Sector, on_delete = models.CASCADE, null = True, blank = True)
     is_staff = models.BooleanField(_('staff status'), default = False)
     is_active = models.BooleanField(_('active status'), default = False)
     is_superuser = models.BooleanField(_('superuser status'), default = False)
