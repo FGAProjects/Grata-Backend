@@ -4,7 +4,6 @@ from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 
 from users.models import User
-from sectors.models import Sector
 
 class UserSerializer(serializers.ModelSerializer):
 
@@ -15,12 +14,10 @@ class UserSerializer(serializers.ModelSerializer):
 
 class CustomRegisterSerializer(RegisterSerializer):
 
-    sector_name = Sector.objects.all()
-    is_participant = serializers.BooleanField()
-    is_administrator = serializers.BooleanField()
+    is_participant = serializers.BooleanField(default = False)
+    is_administrator = serializers.BooleanField(default = False)
     ramal = serializers.CharField(max_length = 6)
     name = serializers.CharField(max_length = 40)
-    sector = serializers.ChoiceField(sector_name)
 
     class Meta:
 
@@ -34,7 +31,6 @@ class CustomRegisterSerializer(RegisterSerializer):
             'password1': self.validated_data.get('password1', ''),
             'password2': self.validated_data.get('password2', ''),
             'ramal': self.validated_data.get('ramal', ''),
-            'sector': self.validated_data.get('sector', ''),
             'name': self.validated_data.get('name', ''),
             'is_administrator': self.validated_data.get('is_administrator', ''),
             'is_participant': self.validated_data.get('is_participant', '')
@@ -46,12 +42,10 @@ class CustomRegisterSerializer(RegisterSerializer):
         user = adapter.new_user(request)
         self.cleaned_data = self.get_cleaned_data()
 
-        sector = Sector.objects.get(name=self.cleaned_data.get('sector'))
         user.is_participant = self.cleaned_data.get('is_participant')
         user.is_administrator = self.cleaned_data.get('is_administrator')
         user.name = self.cleaned_data.get('name')
         user.ramal = self.cleaned_data.get('ramal')
-        user.sector = sector
 
         if user.is_administrator == True:
 

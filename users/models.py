@@ -8,11 +8,12 @@ class User(AbstractUser, PermissionsMixin):
 
     username = models.CharField(max_length = 10, unique = True)
     email = models.EmailField(max_length = 50, unique = True)
-    is_administrator = models.BooleanField()
-    is_participant = models.BooleanField()
+    is_administrator = models.BooleanField(default = False)
+    is_participant = models.BooleanField(default = False)
     ramal = models.CharField(max_length = 6)
     name = models.CharField(max_length = 40)
-    sector = models.ForeignKey(Sector, on_delete = models.CASCADE, null = True, blank = True)
+    sector = models.ForeignKey(Sector, on_delete = models.CASCADE, related_name = 'sectors_user',
+                               null = True, blank = True)
     is_staff = models.BooleanField(_('staff status'), default = False)
     is_active = models.BooleanField(_('active status'), default = False)
     is_superuser = models.BooleanField(_('superuser status'), default = False)
