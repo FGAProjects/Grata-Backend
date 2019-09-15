@@ -25,11 +25,12 @@ class UserUpdate(UpdateAPIView):
 
         user = self.get_object()
         sector = Sector.objects.get(id = request.data.get('sector'))
-        print(sector)
 
         user.username = request.data.get('username')
         user.email = request.data.get('email')
         user.name = request.data.get('name')
+        user.ramal = request.data.get('ramal')
+        user.sector = sector
 
         if request.data.get('is_administrator') is None:
             user.is_administrator = False
@@ -39,9 +40,6 @@ class UserUpdate(UpdateAPIView):
             user.is_participant = False
         else:
             user.is_participant = True
-        user.ramal = request.data.get('ramal')
-
-        user.sector = sector
 
         if user.is_administrator == True:
 
@@ -61,8 +59,8 @@ class UserUpdate(UpdateAPIView):
         sector.sectors_user.add(user)
 
         serializer = UserSerializer(
-            instance=user,
-            data=request.data
+            instance = user,
+            data = request.data
         )
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
