@@ -15,33 +15,7 @@ class MeetingCreateView(CreateAPIView):
 
     serializer_class = MeetingSerialize
     queryset = Meeting.objects.all()
-
-    # def post(self, request, *args, **kwargs):
-    #
-    #     meeting = self.get_object()
-
-#     def update(self, request, *args, **kwargs):
-#
-#         project = self.get_object()
-#         sector = Sector.objects.get(id=request.data.get('sector'))
-#         print(sector)
-#
-#         project.title = request.data.get('title')
-#         project.status = request.data.get('status')
-#         project.sector = sector
-#
-#         sector.sectors_project.add(project)
-#         serializer = ProjectSerialize(
-#             instance = project,
-#             data = request.data
-#         )
-#         serializer.is_valid(raise_exception=True)
-#         self.perform_update(serializer)
-#
-#         return Response(serializer.data)
-
-#
-
+    
 #
 # class ProjectDetailView(RetrieveAPIView):
 #
