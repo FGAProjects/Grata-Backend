@@ -12,12 +12,9 @@ class Meeting(models.Model):
     final_date = models.CharField(max_length = 12)
     initial_hour = models.CharField(max_length = 10)
     final_hour = models.CharField(max_length = 10)
-
-    meeting_leader = models.ForeignKey(User, on_delete = models.CASCADE, related_name = 'user_meeting_leader',
+    meeting_leader = models.ForeignKey(User, on_delete = models.CASCADE, related_name = 'user_leader_in_meeting',
                                        null = True, blank = True)
-    place = models.ForeignKey(Sector, on_delete = models.CASCADE, related_name = 'place_sector',
-                              null = True, blank = True)
-    project = models.ForeignKey(Project, on_delete = models.CASCADE, related_name = 'project_meeting',
+    project = models.ForeignKey(Project, on_delete = models.CASCADE, related_name = 'meetings_in_project',
                                 null = True, blank = True)
 
     def __str__(self):

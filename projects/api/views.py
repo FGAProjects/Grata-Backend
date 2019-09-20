@@ -2,7 +2,8 @@ from rest_framework.generics import CreateAPIView, ListAPIView, \
                                     UpdateAPIView, DestroyAPIView, RetrieveAPIView
 
 from projects.models import Project
-from .serializers import ProjectSerialize
+from sectors.models import Sector
+from projects.api.serializers import ProjectSerialize, SectorProjectsSerialize
 
 class ProjectListView(ListAPIView):
 
@@ -28,3 +29,8 @@ class ProjectDeleteView(DestroyAPIView):
 
     serializer_class = ProjectSerialize
     queryset = Project.objects.all()
+
+class ProjectsSectorsListView(RetrieveAPIView):
+
+    serializer_class = SectorProjectsSerialize
+    queryset = Sector.objects.all()

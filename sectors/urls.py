@@ -1,7 +1,7 @@
 from django.urls import path
 
-from sectors.api.views import SectorListView, SectorCreateView, \
-                               SectorDetailView, SectorUpdateView, SectorDeleteView
+from sectors.api.views import SectorListView, SectorCreateView, SectorDetailView, \
+                              SectorUpdateView, SectorDeleteView
 
 urlpatterns = [
     path('', SectorListView.as_view()),

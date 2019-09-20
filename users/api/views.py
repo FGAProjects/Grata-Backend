@@ -4,7 +4,7 @@ from rest_framework.generics import RetrieveAPIView, UpdateAPIView, DestroyAPIVi
 
 from users.models import User
 from sectors.models import Sector
-from .serializers import UserSerializer
+from users.api.serializers import UserSerializer, UsersLeaderInMeetingSerializer
 
 class UserViewSet(ModelViewSet):
 
@@ -56,8 +56,6 @@ class UserUpdate(UpdateAPIView):
             user.is_active = True
 
         user.save()
-        sector.sectors_user.add(user)
-
         serializer = UserSerializer(
             instance = user,
             data = request.data
@@ -70,4 +68,9 @@ class UserUpdate(UpdateAPIView):
 class UserDelete(DestroyAPIView):
 
     serializer_class = UserSerializer
+    queryset = User.objects.all()
+
+class UserLeaderInMeeting(RetrieveAPIView):
+
+    serializer_class = UsersLeaderInMeetingSerializer
     queryset = User.objects.all()

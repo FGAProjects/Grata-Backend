@@ -1,7 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 from sectors.models import Sector
 
-class SetorSerialize(ModelSerializer):
+class SectorSerialize(ModelSerializer):
 
     class Meta:
 

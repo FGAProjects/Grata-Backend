@@ -4,6 +4,7 @@ from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 
 from users.models import User
+from meetings.api.serializers import MeetingSerialize
 
 class UserSerializer(serializers.ModelSerializer):
 
@@ -12,6 +13,15 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'email', 'username', 'ramal',
                   'name', 'sector', 'is_administrator', 'is_participant')
+
+class UsersLeaderInMeetingSerializer(serializers.ModelSerializer):
+
+    user_leader_in_meeting = MeetingSerialize(many = True)
+
+    class Meta:
+        model = User
+        fields = ('id', 'email', 'username', 'ramal',
+                  'name', 'sector', 'is_administrator', 'is_participant', 'user_leader_in_meeting')
 
 class CustomRegisterSerializer(RegisterSerializer):
 
