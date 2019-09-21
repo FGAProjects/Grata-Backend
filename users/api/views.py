@@ -1,7 +1,8 @@
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.generics import RetrieveAPIView, UpdateAPIView, DestroyAPIView
+from rest_framework.generics import RetrieveAPIView, UpdateAPIView, DestroyAPIView, ListAPIView
 
+from meetings.models import Meeting
 from users.models import User
 from sectors.models import Sector
 from users.api.serializers import UserSerializer, UsersLeaderInMeetingSerializer
@@ -70,7 +71,17 @@ class UserDelete(DestroyAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
 
-class UserLeaderInMeeting(RetrieveAPIView):
+class UserLeaderInMeeting(ListAPIView):
 
     serializer_class = UsersLeaderInMeetingSerializer
-    queryset = User.objects.all()
+
+    def get_queryset(self):
+
+        queryset = Meeting.objects.all()
+        project_pk =  self.kwargs['pk']
+
+        if project_pk is not None:
+
+            queryset = queryset.filter(project = project_pk)
+
+        return queryset

@@ -17,7 +17,7 @@ class ProjectCreateView(CreateAPIView):
 
 class ProjectDetailView(RetrieveAPIView):
 
-    serializer_class = ProjectSerialize
+    serializer_class = SectorProjectsSerialize
     queryset = Project.objects.all()
 
 class ProjectUpdateView(UpdateAPIView):
@@ -30,7 +30,7 @@ class ProjectDeleteView(DestroyAPIView):
     serializer_class = ProjectSerialize
     queryset = Project.objects.all()
 
-class ProjectsSectorsListView(RetrieveAPIView):
+class ProjectsSectorsListView(ListAPIView):
 
     serializer_class = SectorProjectsSerialize
-    queryset = Sector.objects.all()
+    queryset = Project.objects.all()

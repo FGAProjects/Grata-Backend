@@ -1,7 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 
 from projects.models import Project
-from sectors.models import Sector
+from users.api.serializers import StringSerializer
 
 class ProjectSerialize(ModelSerializer):
 
@@ -12,8 +12,9 @@ class ProjectSerialize(ModelSerializer):
 
 class SectorProjectsSerialize(ModelSerializer):
 
-    projects_in_sector = ProjectSerialize(many = True)
+    sector = StringSerializer(many = False)
 
     class Meta:
-        model = Sector
+
+        model = Project
         fields = ('__all__')

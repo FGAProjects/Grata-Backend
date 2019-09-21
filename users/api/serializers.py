@@ -3,25 +3,34 @@ from rest_auth.registration.serializers import RegisterSerializer
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 
+from meetings.models import Meeting
 from users.models import User
-from meetings.api.serializers import MeetingSerialize
+
+class StringSerializer(serializers.StringRelatedField):
+
+    def to_internal_value(self, value):
+
+        return value
 
 class UserSerializer(serializers.ModelSerializer):
 
+    sector = StringSerializer(many = False)
+
     class Meta:
 
         model = User
         fields = ('id', 'email', 'username', 'ramal',
-                  'name', 'sector', 'is_administrator', 'is_participant')
+                  'name', 'sector', 'is_administrator', 'is_participant', 'sector')
 
 class UsersLeaderInMeetingSerializer(serializers.ModelSerializer):
 
-    user_leader_in_meeting = MeetingSerialize(many = True)
+    meeting_leader = StringSerializer(many = False)
+    project = StringSerializer(many = False)
 
     class Meta:
-        model = User
-        fields = ('id', 'email', 'username', 'ramal',
-                  'name', 'sector', 'is_administrator', 'is_participant', 'user_leader_in_meeting')
+
+        model = Meeting
+        fields = ('__all__')
 
 class CustomRegisterSerializer(RegisterSerializer):
 
@@ -36,6 +45,7 @@ class CustomRegisterSerializer(RegisterSerializer):
         fields = ('email', 'username', 'ramal', 'name', 'password', 'is_administrator', 'is_participant')
 
     def get_cleaned_data(self):
+
         return {
             'username': self.validated_data.get('username', ''),
             'email': self.validated_data.get('email', ''),
@@ -80,10 +90,12 @@ class TokenSerializer(serializers.ModelSerializer):
     user_type = serializers.SerializerMethodField()
 
     class Meta:
+
         model = Token
         fields = ('key', 'user', 'user_type')
 
     def get_user_type(self, obj):
+
         serializer_data = UserSerializer(
             obj.user
         ).data
