@@ -10,7 +10,7 @@ class MeetingSerialize(ModelSerializer):
         model = Meeting
         fields = ('__all__')
 
-class MeetingProjectsSerialize(ModelSerializer):
+class MeetingAllInformationsSerialize(ModelSerializer):
 
     project = StringSerializer(many = False)
     sector = StringSerializer(many = False)

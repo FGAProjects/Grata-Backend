@@ -19,7 +19,7 @@ class UserSerializer(serializers.ModelSerializer):
 
         model = User
         fields = ('id', 'email', 'username', 'ramal',
-                  'name', 'sector', 'is_administrator', 'is_participant', 'sector')
+                  'name', 'sector', 'is_administrator', 'is_participant')
 
 class CustomRegisterSerializer(RegisterSerializer):
 
