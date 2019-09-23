@@ -3,7 +3,6 @@ from rest_auth.registration.serializers import RegisterSerializer
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 
-from meetings.models import Meeting
 from users.models import User
 
 class StringSerializer(serializers.StringRelatedField):
@@ -21,16 +20,6 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'email', 'username', 'ramal',
                   'name', 'sector', 'is_administrator', 'is_participant', 'sector')
-
-class UsersLeaderInMeetingSerializer(serializers.ModelSerializer):
-
-    meeting_leader = StringSerializer(many = False)
-    project = StringSerializer(many = False)
-
-    class Meta:
-
-        model = Meeting
-        fields = ('__all__')
 
 class CustomRegisterSerializer(RegisterSerializer):
 

@@ -10,7 +10,7 @@ class ProjectSerialize(ModelSerializer):
         model = Project
         fields = ('__all__')
 
-class SectorProjectsSerialize(ModelSerializer):
+class ProjectSerializeSector(ModelSerializer):
 
     sector = StringSerializer(many = False)
 

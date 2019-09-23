@@ -11,10 +11,20 @@ class MeetingListView(ListAPIView):
     serializer_class = MeetingSerialize
     queryset = Meeting.objects.all()
 
-class MeetingInProjectListView(RetrieveAPIView):
+class MeetingInProjectListView(ListAPIView):
 
     serializer_class = MeetingProjectsSerialize
-    queryset = Project.objects.all()
+
+    def get_queryset(self):
+
+        queryset = Meeting.objects.all()
+        project_pk =  self.kwargs['pk']
+
+        if project_pk is not None:
+
+            queryset = queryset.filter(project = project_pk)
+
+        return queryset
 
 class MeetingCreateView(CreateAPIView):
 

@@ -1,7 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 
 from meetings.models import Meeting
-from projects.models import Project
+from users.api.serializers import StringSerializer
 
 class MeetingSerialize(ModelSerializer):
 
@@ -12,8 +12,10 @@ class MeetingSerialize(ModelSerializer):
 
 class MeetingProjectsSerialize(ModelSerializer):
 
-    meetings_in_project = MeetingSerialize(many = True)
+    project = StringSerializer(many = False)
+    sector = StringSerializer(many = False)
 
     class Meta:
-        model = Project
+
+        model = Meeting
         fields = ('__all__')
