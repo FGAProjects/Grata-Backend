@@ -19,3 +19,12 @@ class MeetingAllInformationsSerialize(ModelSerializer):
 
         model = Meeting
         fields = ('__all__')
+
+class MeetingTopicsSerialize(ModelSerializer):
+
+    topics = StringSerializer(many = False)
+
+    class Meta:
+
+        model = Meeting
+        fields = ('__all__')

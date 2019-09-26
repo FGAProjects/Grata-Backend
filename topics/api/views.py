@@ -1,5 +1,4 @@
-from rest_framework.generics import CreateAPIView, ListAPIView, \
-                                    UpdateAPIView, DestroyAPIView, RetrieveAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, DestroyAPIView
 from topics.models import Topic
 from topics.api.serializers import TopicSerialize
 
@@ -9,16 +8,6 @@ class TopicsListView(ListAPIView):
     queryset = Topic.objects.all()
 
 class TopicCreateView(CreateAPIView):
-
-    serializer_class = TopicSerialize
-    queryset = Topic.objects.all()
-
-class TopicUpdateView(UpdateAPIView):
-
-    serializer_class = TopicSerialize
-    queryset = Topic.objects.all()
-
-class TopicDetailView(RetrieveAPIView):
 
     serializer_class = TopicSerialize
     queryset = Topic.objects.all()
