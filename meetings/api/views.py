@@ -2,7 +2,7 @@ from rest_framework.generics import CreateAPIView, ListAPIView, \
                                     UpdateAPIView, DestroyAPIView, RetrieveAPIView
 
 from meetings.models import Meeting
-from meetings.api.serializers import MeetingSerialize, MeetingAllInformationsSerialize, MeetingTopicsSerialize
+from meetings.api.serializers import MeetingSerialize
 
 class MeetingListView(ListAPIView):
 
@@ -11,7 +11,7 @@ class MeetingListView(ListAPIView):
 
 class MeetingInProjectListView(ListAPIView):
 
-    serializer_class = MeetingAllInformationsSerialize
+    serializer_class = MeetingSerialize
 
     def get_queryset(self):
 
@@ -26,7 +26,7 @@ class MeetingInProjectListView(ListAPIView):
 
 class MeetingTopicListView(ListAPIView):
 
-    serializer_class = MeetingTopicsSerialize
+    serializer_class = MeetingSerialize
 
     def get_queryset(self):
 
@@ -46,7 +46,7 @@ class MeetingCreateView(CreateAPIView):
 
 class MeetingDetailView(RetrieveAPIView):
 
-    serializer_class = MeetingAllInformationsSerialize
+    serializer_class = MeetingSerialize
     queryset = Meeting.objects.all()
 
 class MeetingUpdateView(UpdateAPIView):

@@ -10,19 +10,10 @@ class MeetingSerialize(ModelSerializer):
         model = Meeting
         fields = ('__all__')
 
-class MeetingAllInformationsSerialize(ModelSerializer):
+class MeetingSerializeView(ModelSerializer):
 
     project = StringSerializer(many = False)
     sector = StringSerializer(many = False)
-
-    class Meta:
-
-        model = Meeting
-        fields = ('__all__')
-
-class MeetingTopicsSerialize(ModelSerializer):
-
-    topics = StringSerializer(many = False)
 
     class Meta:
 
