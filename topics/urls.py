@@ -1,7 +1,7 @@
 from django.urls import path
 
-from topics.api.views import TopicsList
+from topics.api.views import TopicsListView
 
 urlpatterns = [
-    path('', TopicsList.as_view()),
+    path('', TopicsListView.as_view()),
 ]

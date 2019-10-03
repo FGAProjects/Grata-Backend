@@ -10,5 +10,6 @@ urlpatterns = [
     path('projects/', include('projects.urls')),
     path('sectors/', include('sectors.urls')),
     path('meetings/', include('meetings.urls')),
-    path('topics/', include('topics.urls'))
+    path('topics/', include('topics.urls')),
+    path('rules/', include('rules.urls'))
 ]

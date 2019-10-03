@@ -3,6 +3,7 @@ from django.db import models
 from sectors.models import Sector
 from projects.models import Project
 from topics.models import Topic
+from rules.models import Rules
 
 class Meeting(models.Model):
 
@@ -18,6 +19,7 @@ class Meeting(models.Model):
     project = models.ForeignKey(Project, on_delete = models.CASCADE, related_name = 'meetings_in_project',
                                 null = True, blank = True)
     topics = models.ManyToManyField(Topic, null = True, blank = True)
+    rules = models.ManyToManyField(Rules, null = True, blank = True)
 
     def __str__(self):
         return self.title

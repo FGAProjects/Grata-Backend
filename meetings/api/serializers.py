@@ -5,9 +5,11 @@ from topics.models import Topic
 from meetings.models import Meeting
 from projects.models import Project
 from sectors.models import Sector
+from rules.models import Rules
 
 from users.api.serializers import StringSerializer
 from topics.api.serializers import TopicSerialize
+from rules.api.serializers import RulesSerialize
 
 class MeetingSerialize(ModelSerializer):
 
@@ -29,12 +31,12 @@ class MeetingSerializeView(ModelSerializer):
 class MeetingSerializeUpdate(ModelSerializer):
 
     topics = SerializerMethodField()
+    rules = SerializerMethodField()
 
     class Meta:
 
         model = Meeting
         fields = ('__all__')
-
 
     def get_topics(self, topic):
 
@@ -62,12 +64,11 @@ class MeetingSerializeUpdate(ModelSerializer):
         if request.data.get('topics') != None:
 
             for topic in request.data.get('topics'):
+
                 new_topic = Topic()
                 new_topic.title = topic['title']
                 new_topic.save()
 
                 meeting.topics.add(new_topic)
-
-
 
         return meeting
