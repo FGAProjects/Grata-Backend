@@ -8,8 +8,6 @@ from sectors.models import Sector
 from rules.models import Rules
 
 from users.api.serializers import StringSerializer
-from topics.api.serializers import TopicSerialize
-from rules.api.serializers import RulesSerialize
 
 class MeetingSerialize(ModelSerializer):
 
@@ -22,6 +20,8 @@ class MeetingSerializeView(ModelSerializer):
 
     project = StringSerializer(many = False)
     sector = StringSerializer(many = False)
+    topics = StringSerializer(many = True)
+    rules = StringSerializer(many = True)
 
     class Meta:
 
@@ -37,11 +37,6 @@ class MeetingSerializeUpdate(ModelSerializer):
 
         model = Meeting
         fields = ('__all__')
-
-    def get_topics(self, topic):
-
-        questions = TopicSerialize(topic.topics.all(), many = True).data
-        return questions
 
     def update(self, request):
 
@@ -67,8 +62,22 @@ class MeetingSerializeUpdate(ModelSerializer):
 
                 new_topic = Topic()
                 new_topic.title = topic['title']
-                new_topic.save()
 
-                meeting.topics.add(new_topic)
+                if Topic.objects.all().filter(title = new_topic.title) == True:
+
+                    new_topic.save()
+                    meeting.topics.add(new_topic)
+
+        if request.data.get('rules') != None:
+
+            for rules in request.data.get('rules'):
+
+                new_rule = Rules()
+                new_rule.title = rules['title']
+
+                if Rules.objects.all().filter(title = new_rule.title) == True:
+
+                    new_rule.save()
+                    meeting.rules.add(new_rule)
 
         return meeting

@@ -18,8 +18,8 @@ class Meeting(models.Model):
                                null = True, blank = True)
     project = models.ForeignKey(Project, on_delete = models.CASCADE, related_name = 'meetings_in_project',
                                 null = True, blank = True)
-    topics = models.ManyToManyField(Topic, null = True, blank = True)
-    rules = models.ManyToManyField(Rules, null = True, blank = True)
+    topics = models.ManyToManyField(Topic)
+    rules = models.ManyToManyField(Rules)
 
     def __str__(self):
         return self.title

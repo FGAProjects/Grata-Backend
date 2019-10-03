@@ -9,7 +9,7 @@ from meetings.api.serializers import MeetingSerialize, MeetingSerializeUpdate, M
 
 class MeetingListView(ListAPIView):
 
-    serializer_class = MeetingSerialize
+    serializer_class = MeetingSerializeView
     queryset = Meeting.objects.all()
 
 class MeetingInProjectListView(ListAPIView):
