@@ -18,8 +18,8 @@ class UserDetail(RetrieveAPIView):
 
 class UserUpdate(UpdateAPIView):
 
-    queryset = User.objects.all()
     serializer_class = UserSerializer
+    queryset = User.objects.all()
 
     def update(self, request, *args, **kwargs):
 

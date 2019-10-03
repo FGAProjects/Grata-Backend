@@ -2,6 +2,7 @@ from django.db import models
 
 from sectors.models import Sector
 from projects.models import Project
+from topics.models import Topic
 
 class Meeting(models.Model):
 
@@ -16,6 +17,7 @@ class Meeting(models.Model):
                                null = True, blank = True)
     project = models.ForeignKey(Project, on_delete = models.CASCADE, related_name = 'meetings_in_project',
                                 null = True, blank = True)
+    topics = models.ManyToManyField(Topic, null = True, blank = True)
 
     def __str__(self):
         return self.title
