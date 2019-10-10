@@ -63,8 +63,8 @@ class MeetingUpdateView(UpdateAPIView):
         serializer.is_valid()
         meeting = serializer.update(request)
         if meeting:
-            return Response(status=HTTP_201_CREATED)
-        return Response(status=HTTP_400_BAD_REQUEST)
+            return Response(status = HTTP_201_CREATED)
+        return Response(status = HTTP_400_BAD_REQUEST)
 
 class MeetingDeleteView(DestroyAPIView):
 

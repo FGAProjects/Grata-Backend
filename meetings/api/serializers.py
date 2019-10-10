@@ -63,7 +63,7 @@ class MeetingSerializeUpdate(ModelSerializer):
                 new_topic = Topic()
                 new_topic.title = topic['title']
 
-                if Topic.objects.all().filter(title = new_topic.title) == True:
+                if Topic.objects.all().filter(title = new_topic.title) != True:
 
                     new_topic.save()
                     meeting.topics.add(new_topic)
@@ -75,9 +75,11 @@ class MeetingSerializeUpdate(ModelSerializer):
                 new_rule = Rules()
                 new_rule.title = rules['title']
 
-                if Rules.objects.all().filter(title = new_rule.title) == True:
+                if Rules.objects.all().filter(title = new_rule.title) != True:
 
                     new_rule.save()
                     meeting.rules.add(new_rule)
+
+
 
         return meeting

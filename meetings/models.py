@@ -4,6 +4,7 @@ from sectors.models import Sector
 from projects.models import Project
 from topics.models import Topic
 from rules.models import Rules
+from users.models import User
 
 class Meeting(models.Model):
 
@@ -18,8 +19,9 @@ class Meeting(models.Model):
                                null = True, blank = True)
     project = models.ForeignKey(Project, on_delete = models.CASCADE, related_name = 'meetings_in_project',
                                 null = True, blank = True)
-    topics = models.ManyToManyField(Topic)
-    rules = models.ManyToManyField(Rules)
+    topics = models.ManyToManyField(Topic, blank = True)
+    rules = models.ManyToManyField(Rules, blank = True)
+    users = models.ManyToManyField(User, blank = True)
 
     def __str__(self):
         return self.title
