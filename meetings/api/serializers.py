@@ -6,6 +6,7 @@ from meetings.models import Meeting
 from projects.models import Project
 from sectors.models import Sector
 from rules.models import Rules
+from users.models import User
 
 from users.api.serializers import StringSerializer
 
@@ -22,6 +23,7 @@ class MeetingSerializeView(ModelSerializer):
     sector = StringSerializer(many = False)
     topics = StringSerializer(many = True)
     rules = StringSerializer(many = True)
+    users = StringSerializer(many = True)
 
     class Meta:
 
@@ -80,6 +82,11 @@ class MeetingSerializeUpdate(ModelSerializer):
                     new_rule.save()
                     meeting.rules.add(new_rule)
 
+        if request.data.get('users') != None:
 
+            for users in request.data.get('users'):
+
+                new_user = User.objects.get(id = users['id'])
+                meeting.users.add(new_user)
 
         return meeting
