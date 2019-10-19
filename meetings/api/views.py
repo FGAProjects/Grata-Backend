@@ -27,21 +27,6 @@ class MeetingInProjectListView(ListAPIView):
 
         return queryset
 
-class MeetingTopicListView(ListAPIView):
-
-    serializer_class = MeetingSerialize
-
-    def get_queryset(self):
-
-        queryset = Meeting.objects.all()
-        meeting_id = self.kwargs['pk']
-
-        if meeting_id is not None:
-
-            queryset = queryset.filter(topics = meeting_id)
-
-            return queryset
-
 class MeetingCreateView(CreateAPIView):
 
     serializer_class = MeetingSerialize

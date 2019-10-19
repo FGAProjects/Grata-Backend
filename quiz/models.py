@@ -1,6 +1,6 @@
 from django.db import models
 
-from meetings.models import Meeting
+from users.models import User
 
 class Choice(models.Model):
 
@@ -9,14 +9,21 @@ class Choice(models.Model):
     def __str__(self):
         return self.title
 
-class Quiz(models.Model):
+class Question(models.Model):
 
-    question = models.CharField(max_length = 200)
-    choices = models.ManyToManyField(Choice)
-    answer = models.ForeignKey(
-        Choice, on_delete = models.CASCADE, related_name = 'answer', blank = True, null = True)
-    meeting = models.ForeignKey(
-        Meeting, on_delete = models.CASCADE, related_name = 'questions', blank = True, null = True)
+    title = models.CharField(max_length = 50)
 
     def __str__(self):
-        return self.question
+        return self.title
+
+class Quiz(models.Model):
+
+    title = models.CharField(max_length = 50)
+    answer = models.ForeignKey(Choice, on_delete = models.CASCADE, related_name = 'answer_quis',
+                               blank = True, null = True)
+    user = models.ForeignKey(User, on_delete = models.CASCADE, related_name = 'user_quiz', blank = True, null = True)
+    choices = models.ManyToManyField(Choice)
+    questions = models.ManyToManyField(Question)
+
+    def __str__(self):
+        return self.title

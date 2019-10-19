@@ -19,7 +19,7 @@ class User(AbstractUser, PermissionsMixin):
     is_superuser = models.BooleanField(_('superuser status'), default = False)
 
     def __str__(self):
-        return self.username
+        return self.name
 
 class Participant(models.Model):
 

@@ -17,8 +17,11 @@ class MeetingSerialize(ModelSerializer):
         model = Meeting
         fields = ('__all__')
 
+
+
 class MeetingSerializeView(ModelSerializer):
 
+    meeting_leader = StringSerializer(many = False)
     project = StringSerializer(many = False)
     sector = StringSerializer(many = False)
     topics = StringSerializer(many = True)
@@ -43,11 +46,6 @@ class MeetingSerializeUpdate(ModelSerializer):
     def update(self, request):
 
         meeting = Meeting.objects.get(id = request.data.get('meeting'))
-        sector = Sector.objects.get(id = request.data.get('sector'))
-        project = Project.objects.get(id = request.data.get('project'))
-
-        meeting.sector = sector
-        meeting.project = project
 
         meeting.title = request.data.get('title')
         meeting.subject_matter = request.data.get('subject_matter')
