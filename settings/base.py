@@ -29,7 +29,8 @@ INSTALLED_APPS = [
     'meetings',
     'topics',
     'rules',
-    'quiz'
+    'questionnaires',
+    'choices'
 ]
 
 MIDDLEWARE = [

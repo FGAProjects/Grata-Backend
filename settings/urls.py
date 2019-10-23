@@ -12,5 +12,6 @@ urlpatterns = [
     path('meetings/', include('meetings.urls')),
     path('topics/', include('topics.urls')),
     path('rules/', include('rules.urls')),
-    path('quiz/', include('quiz.urls'))
+    path('questionnaires/', include('questionnaires.urls')),
+    path('choices/', include('choices.urls'))
 ]

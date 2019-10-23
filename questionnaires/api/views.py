@@ -1,6 +1,6 @@
 from rest_framework.generics import ListAPIView
-from quiz.models import Quiz
-from quiz.api.serializers import QuizSerialize
+from questionnaires.models import Quiz
+from questionnaires.api.serializers import QuizSerialize
 
 class QuizListView(ListAPIView):
 

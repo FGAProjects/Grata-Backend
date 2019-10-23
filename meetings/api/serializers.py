@@ -3,10 +3,10 @@ from rest_framework.serializers import ModelSerializer
 
 from topics.models import Topic
 from meetings.models import Meeting
-from projects.models import Project
-from sectors.models import Sector
 from rules.models import Rules
 from users.models import User
+from choices.models import Choice
+from questionnaires.models import Quiz
 
 from users.api.serializers import StringSerializer
 
@@ -16,8 +16,6 @@ class MeetingSerialize(ModelSerializer):
 
         model = Meeting
         fields = ('__all__')
-
-
 
 class MeetingSerializeView(ModelSerializer):
 
@@ -86,5 +84,31 @@ class MeetingSerializeUpdate(ModelSerializer):
 
                 new_user = User.objects.get(id = users['id'])
                 meeting.users.add(new_user)
+
+        if request.data.get('questions') != None:
+
+            current_meeting = Meeting.objects.get(id = request.data.get('meeting'))
+
+            for quiz in request.data.get('questions'):
+
+                new_quiz = Quiz()
+                new_quiz.title = quiz['title']
+
+                for user in current_meeting.users.all():
+
+                    new_user = User.objects.get(id = user.id)
+                    new_quiz.users.add(new_user)
+
+                new_quiz.save()
+
+                for choice in quiz['choices']:
+
+                    new_choice = Choice()
+                    new_choice.title = choice
+                    new_choice.save()
+                    new_quiz.choices.add(new_choice)
+
+                new_quiz.meeting = current_meeting
+                new_quiz.save()
 
         return meeting
