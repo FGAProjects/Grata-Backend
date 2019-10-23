@@ -5,7 +5,7 @@ from projects.models import Project
 from topics.models import Topic
 from rules.models import Rules
 from users.models import User
-from quiz.models import Quiz
+from questionnaires.models import Quiz
 
 class Meeting(models.Model):
 
