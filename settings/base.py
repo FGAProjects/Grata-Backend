@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'topics',
     'rules',
     'questionnaires',
+    'answers',
     'choices'
 ]
 
