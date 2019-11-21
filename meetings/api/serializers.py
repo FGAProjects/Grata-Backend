@@ -5,8 +5,6 @@ from topics.models import Topic
 from meetings.models import Meeting
 from rules.models import Rules
 from users.models import User
-from choices.models import Choice
-from questionnaires.models import Quiz
 
 from users.api.serializers import StringSerializer
 
@@ -25,7 +23,6 @@ class MeetingSerializeView(ModelSerializer):
     topics = StringSerializer(many = True)
     rules = StringSerializer(many = True)
     users = StringSerializer(many = True)
-    questionnaires = StringSerializer(many = True)
 
     class Meta:
 
@@ -85,34 +82,5 @@ class MeetingSerializeUpdate(ModelSerializer):
 
                 new_user = User.objects.get(id = users['id'])
                 meeting.users.add(new_user)
-
-        if request.data.get('questions') != None:
-
-            current_meeting = Meeting.objects.get(id = request.data.get('meeting'))
-
-            for quiz in request.data.get('questions'):
-
-                new_quiz = Quiz()
-                new_quiz.title = quiz['title']
-                new_quiz.save()
-
-                for user in current_meeting.users.all():
-
-                    if user.name == str(current_meeting.meeting_leader):
-
-                        print('Nothing to do')
-                    else:
-
-                        new_quiz.users.add(user)
-
-                for choice in quiz['choices']:
-
-                    new_choice = Choice()
-                    new_choice.title = choice
-                    new_choice.save()
-                    new_quiz.choices.add(new_choice)
-
-                new_quiz.save()
-                current_meeting.questionnaires.add(new_quiz)
 
         return meeting
