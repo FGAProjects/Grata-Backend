@@ -38,3 +38,8 @@ class QuizMeetingListView(ListAPIView):
             queryset = queryset.filter(meeting = meeting_pk)
 
         return queryset
+
+class QuizDetailView(RetrieveAPIView):
+
+    serializer_class = QuizSerialize
+    queryset = Quiz.objects.all()
