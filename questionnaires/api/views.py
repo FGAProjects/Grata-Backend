@@ -2,15 +2,10 @@ from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView
 from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED, HTTP_400_BAD_REQUEST
 
-from questionnaires.models import Quiz
-from questionnaires.api.serializers import QuizSerialize, QuizSerializeCreate
+from questionnaires.models import Quiz, Questionnaire
+from questionnaires.api.serializers import QuizSerialize, QuizSerializeCreate, QuestionnaireSerialize
 
-class QuizListView(ListAPIView):
-
-    serializer_class = QuizSerialize
-    queryset = Quiz.objects.all()
-
-class QuizCreateView(CreateAPIView):
+class QuesttionaireCreateView(CreateAPIView):
 
     serializer_class = QuizSerialize
     queryset = Quiz.objects.all()
@@ -25,13 +20,18 @@ class QuizCreateView(CreateAPIView):
             return Response(status = HTTP_201_CREATED)
         return Response(status = HTTP_400_BAD_REQUEST)
 
-class QuizMeetingListView(ListAPIView):
+class QuesttionaireListView(ListAPIView):
 
-    serializer_class = QuizSerialize
+    serializer_class = QuestionnaireSerialize
+    queryset = Questionnaire.objects.all()
+
+class QuesttionaireMeetingView(ListAPIView):
+
+    serializer_class = QuestionnaireSerialize
 
     def get_queryset(self):
 
-        queryset = Quiz.objects.all()
+        queryset = Questionnaire.objects.all()
         meeting_pk = self.kwargs['pk']
 
         if meeting_pk is not None:
@@ -39,7 +39,7 @@ class QuizMeetingListView(ListAPIView):
 
         return queryset
 
-class QuizDetailView(RetrieveAPIView):
+class QuesttionaireDetailView(RetrieveAPIView):
 
-    serializer_class = QuizSerialize
-    queryset = Quiz.objects.all()
+    serializer_class = QuestionnaireSerialize
+    queryset = Questionnaire.objects.all()

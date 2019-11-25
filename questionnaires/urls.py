@@ -1,11 +1,12 @@
 from django.urls import path
 
-from questionnaires.api.views import QuizListView, QuizCreateView, QuizMeetingListView, QuizDetailView
+from questionnaires.api.views import QuesttionaireCreateView, QuesttionaireDetailView, \
+                                     QuesttionaireListView, QuesttionaireMeetingView
 
 urlpatterns = [
 
-    path('', QuizListView.as_view()),
-    path('create/', QuizCreateView.as_view()),
-    path('detail/<pk>/', QuizDetailView.as_view()),
-    path('questtionaire_meeting/<pk>/', QuizMeetingListView.as_view())
+    path('', QuesttionaireListView.as_view()),
+    path('create/', QuesttionaireCreateView.as_view()),
+    path('detail/<pk>/', QuesttionaireDetailView.as_view()),
+    path('questtionaires_meeting/<pk>/', QuesttionaireMeetingView.as_view())
 ]
