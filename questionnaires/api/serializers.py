@@ -62,8 +62,10 @@ class QuizSerializeCreate(ModelSerializer):
                 new_choice.save()
                 new_quiz.choices.add(new_choice)
 
+            new_quiz.meeting = current_meeting
             new_quiz.save()
             questionnaires.quiz.add(new_quiz)
+
         questionnaires.save()
 
         return questionnaires
