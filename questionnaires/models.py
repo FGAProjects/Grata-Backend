@@ -21,3 +21,8 @@ class Questionnaire(models.Model):
     meeting = models.ForeignKey(Meeting, on_delete = models.CASCADE, related_name = 'questionnaire_in_meeting',
                                 null = True, blank = True)
     quiz = models.ManyToManyField(Quiz)
+
+# class GradedQuesttionaire(models.Model):
+#
+#     user = models.ForeignKey(User, on_delete = models.CASCADE, related_name = 'graded_questtionaire',
+#                              null = True, blank = True)
