@@ -5,7 +5,7 @@ from rest_framework.status import HTTP_201_CREATED, HTTP_400_BAD_REQUEST
 
 from meetings.models import Meeting
 
-from meetings.api.serializers import MeetingSerialize, MeetingSerializeUpdate, MeetingSerializeView
+from meetings.api.serializers import MeetingSerialize, MeetingSerializeUpdate, MeetingSerializeView, MeetingQuesttionaire
 
 class MeetingListView(ListAPIView):
 
@@ -24,6 +24,19 @@ class MeetingInProjectListView(ListAPIView):
         if project_pk is not None:
 
             queryset = queryset.filter(project = project_pk)
+
+        return queryset
+
+class QuesttionairesInMeetingListView(ListAPIView):
+
+    serializer_class = MeetingQuesttionaire
+
+    def get_queryset(self):
+
+        meeting_id = self.kwargs['pk']
+        current_meeting = Meeting.objects.get(id = meeting_id)
+
+        queryset = current_meeting.questtionaire.all()
 
         return queryset
 
