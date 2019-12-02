@@ -1,9 +1,20 @@
 from rest_framework.serializers import ModelSerializer
 
-from questionnaires.models import Quiz, Questionnaire
+from questionnaires.models import Quiz, Questionnaire, GradedQuesttionaire
 from meetings.models import Meeting
 from choices.models import Choice
 from users.api.serializers import StringSerializer
+
+class GradedQuesttionaireSerialize(ModelSerializer):
+
+    class Meta:
+
+        model = GradedQuesttionaire
+        fields = ('__all__')
+
+    # def create(self, request):
+    #
+    #     pass
 
 class QuizSerialize(ModelSerializer):
 
@@ -40,10 +51,13 @@ class QuizSerializeCreate(ModelSerializer):
         questionnaires.meeting = current_meeting
         questionnaires.save()
 
+        order = 1
+
         for quiz in request.data.get('questions'):
 
             new_quiz = Quiz()
             new_quiz.title = quiz['title']
+            new_quiz.order = order
             new_quiz.save()
 
             for user in current_meeting.users.all():
@@ -65,6 +79,7 @@ class QuizSerializeCreate(ModelSerializer):
             new_quiz.meeting = current_meeting
             new_quiz.save()
             questionnaires.quiz.add(new_quiz)
+            order += 1
 
         questionnaires.save()
 

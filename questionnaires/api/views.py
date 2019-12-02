@@ -10,7 +10,7 @@ class QuizListView(ListAPIView):
     serializer_class = QuizSerialize
     queryset = Quiz.objects.all()
 
-class QuizMeetingListView(ListAPIView):
+class QuizDetailView(ListAPIView):
 
     serializer_class = QuizSerialize
 
@@ -20,14 +20,9 @@ class QuizMeetingListView(ListAPIView):
         meeting_pk = self.kwargs['pk']
 
         if meeting_pk is not None:
-            queryset = queryset.filter(meeting=meeting_pk)
+            queryset = queryset.filter(meeting = meeting_pk)
 
         return queryset
-
-class QuizDetailView(RetrieveAPIView):
-
-    serializer_class = QuizSerialize
-    queryset = Quiz.objects.all()
 
 class QuesttionaireCreateView(CreateAPIView):
 
