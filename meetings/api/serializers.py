@@ -126,8 +126,8 @@ class MeetingSerializeUpdate(ModelSerializer):
                     new_choice.save()
                     new_quiz.choices.add(new_choice)
 
-                new_quiz.save()
                 new_quiz.questtionaire = questtionaires
+                new_quiz.save()
                 order += 1
 
         return meeting

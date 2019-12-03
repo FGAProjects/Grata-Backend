@@ -16,5 +16,6 @@ urlpatterns = [
     path('questionnaires/', include('questionnaires.urls')),
     path('choices/', include('choices.urls')),
     path('quiz/', include('quiz.urls')),
-    path('answers/', include('answers.urls'))
+    path('answers/', include('answers.urls')),
+    path('graded_questtionaire/', include('gradedquesttionaire.urly'))
 ]

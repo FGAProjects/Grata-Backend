@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from questionnaires.models import Questionnaire, GradedQuesttionaire
+from questionnaires.models import Questionnaire
 from users.api.serializers import StringSerializer
 
 class QuestionnaireSerialize(ModelSerializer):
@@ -10,11 +10,4 @@ class QuestionnaireSerialize(ModelSerializer):
     class Meta:
 
         model = Questionnaire
-        fields = ('__all__')
-
-class GradedQuesttionaireSerialize(ModelSerializer):
-
-    class Meta:
-
-        model = GradedQuesttionaire
         fields = ('__all__')

@@ -9,12 +9,3 @@ class Questionnaire(models.Model):
 
     def __str__(self):
         return self.title
-
-class GradedQuesttionaire(models.Model):
-
-    user = models.ForeignKey(User, on_delete = models.CASCADE, related_name = 'answer_user',
-                             null = True, blank = True)
-    choice = models.ForeignKey(Choice, on_delete = models.CASCADE, related_name = 'answer_choice',
-                             null = True, blank = True)
-    answer = models.ForeignKey(Answer, on_delete = models.CASCADE, related_name = 'answer_answer',
-                             null = True, blank = True)

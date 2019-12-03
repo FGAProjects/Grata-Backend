@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'questionnaires',
     'answers',
     'quiz',
+    'gradedquesttionaire',
     'choices'
 ]
 
