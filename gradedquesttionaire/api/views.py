@@ -13,6 +13,20 @@ class GradedQuesttionaireListView(ListAPIView):
     serializer_class = GradedQuesttionaireSerialize
     queryset = GradedQuesttionaire.objects.all()
 
+class GradedQuesttionaireInQuesttionaireListView(ListAPIView):
+
+    serializer_class = GradedQuesttionaireSerialize
+
+    def get_queryset(self):
+
+        queryset = GradedQuesttionaire.objects.all()
+        questtionaire_pk = self.kwargs['pk']
+
+        if questtionaire_pk is not None:
+            queryset = queryset.filter(questtionaire = questtionaire_pk)
+
+        return queryset
+
 class GradedQuesttionaireCreateView(CreateAPIView):
 
     serializer_class = GradedQuesttionaireSerialize

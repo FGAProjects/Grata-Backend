@@ -2,7 +2,6 @@ from django.db import models
 
 from users.models import User
 from choices.models import Choice
-from answers.models import Answer
 from quiz.models import Quiz, Questionnaire
 
 class GradedQuesttionaire(models.Model):
