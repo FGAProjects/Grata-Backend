@@ -12,7 +12,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
     'django.contrib.sites',
     'allauth',
     'allauth.account',
@@ -30,6 +30,8 @@ INSTALLED_APPS = [
     'topics',
     'rules',
     'questionnaires',
+    'quiz',
+    'gradedquesttionaire',
     'choices'
 ]
 
