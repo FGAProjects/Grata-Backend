@@ -9,6 +9,10 @@ from users.api.serializers import StringSerializer
 
 class GradedQuesttionaireSerializeView(ModelSerializer):
 
+    user = StringSerializer(many = False)
+    choice = StringSerializer(many = False)
+    quiz = StringSerializer(many = False)
+
     class Meta:
 
         model = GradedQuesttionaire
@@ -26,8 +30,11 @@ class GradedQuesttionaireSerialize(ModelSerializer):
         data = request.data
         user = User.objects.get(id = data['user'])
         questtionaire = Questionnaire.objects.get(id = data['questtionaire'])
+        answers = []
 
-        answers = [data['answers'][answer] for answer in data['answers']]
+        for answer in data['answers']:
+            answers.append(answer)
+
         quizs = data['quiz']
 
         for aux, quiz in enumerate(quizs):
@@ -38,9 +45,7 @@ class GradedQuesttionaireSerialize(ModelSerializer):
 
             new_quiz = Quiz.objects.get(id = quiz)
             graded_questtionaire.quiz = new_quiz
-            new_choice = Choice.objects.get(title = answers[aux])
+            new_choice = Choice.objects.get(id = answers[aux])
             graded_questtionaire.choice = new_choice
             graded_questtionaire.status = True
             graded_questtionaire.save()
-
-            print(graded_questtionaire)

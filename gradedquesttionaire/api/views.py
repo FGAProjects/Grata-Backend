@@ -1,4 +1,4 @@
-from rest_framework.generics import ListAPIView, CreateAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView, DestroyAPIView
 from rest_framework.response import Response
 from rest_framework.status import (
     HTTP_201_CREATED,
@@ -6,7 +6,7 @@ from rest_framework.status import (
 )
 
 from gradedquesttionaire.models import GradedQuesttionaire
-from gradedquesttionaire.api.serializers import GradedQuesttionaireSerialize
+from gradedquesttionaire.api.serializers import GradedQuesttionaireSerialize, GradedQuesttionaireSerializeView
 
 class GradedQuesttionaireListView(ListAPIView):
 
@@ -15,7 +15,7 @@ class GradedQuesttionaireListView(ListAPIView):
 
 class GradedQuesttionaireInQuesttionaireListView(ListAPIView):
 
-    serializer_class = GradedQuesttionaireSerialize
+    serializer_class = GradedQuesttionaireSerializeView
 
     def get_queryset(self):
 
@@ -56,3 +56,8 @@ class GradedQuesttionaireQuizView(ListAPIView):
             queryset = queryset.filter(quiz = quiz_id)
 
         return queryset
+
+class GradedQuesttionaireDelete(DestroyAPIView):
+
+    serializer_class = GradedQuesttionaireSerialize
+    queryset = GradedQuesttionaire.objects.all()
