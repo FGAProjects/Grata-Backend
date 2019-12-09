@@ -32,7 +32,8 @@ INSTALLED_APPS = [
     'questionnaires',
     'quiz',
     'gradedquesttionaire',
-    'choices'
+    'choices',
+    'comments'
 ]
 
 MIDDLEWARE = [
